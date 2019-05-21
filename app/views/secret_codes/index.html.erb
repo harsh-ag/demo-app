@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Secret Codes</h2>
+  <div class='row'>
+    <div class='col-3'> Generate Secret Codes </div>
+    <div class='col-6  text-right'>
+      <%= form_tag secret_codes_path do %>
+        <%= select_tag(:number, options_for_select(SecretCode::OPTION_VALUES_FOR_GENERATION, SecretCode::DEFAULT_GENERATION_NUMBER)) %>
+        <%= submit_tag 'Generate' %>
+      <% end %>
+    </div>
+  </div> <br/>
+
+  <table class="table table-bordered col-9">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @secret_codes.each do |secret_code| %>
+        <tr>
+          <td> <%= secret_code.code %> </td>
+          <td> <%= secret_code.user&.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
